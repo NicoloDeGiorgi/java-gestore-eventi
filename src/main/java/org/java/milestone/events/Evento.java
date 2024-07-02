@@ -16,11 +16,6 @@ public class Evento {
 			this.reservedPlaces = 0;
 			this.eventData = eventData;
 			
-			if (this.totalPlaces <= 1) {
-				this.totalPlaces = totalPlaces;	
-			} else {
-				System.out.println("Devi insierie n numero di posto valido!");
-			}
 		}
 		
 }
