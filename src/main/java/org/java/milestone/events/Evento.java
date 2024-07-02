@@ -28,6 +28,30 @@ public class Evento {
 			} else {																			
 				System.out.println("Devi inserire un numero di posto valido!"); 	
 			}
+		}	
+   // GETTER E SETTER
+		public String getEventTitle() {
+			return eventTitle;
 		}
 
+		public void setEventTitle(String eventTitle) {
+			this.eventTitle = eventTitle;
+		}
+
+		public LocalDate getEventData() {
+			return eventData;
+		}
+
+		public void setEventData(LocalDate eventData) {
+			this.eventData = eventData;
+		}
+         // solo in lettura
+		public int getTotalPlaces() {
+			return totalPlaces;
+		}
+        // solo in lettura
+		public int getReservedPlaces() {
+			return reservedPlaces;
+		}
+		
 }
