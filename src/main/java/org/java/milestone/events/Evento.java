@@ -14,8 +14,20 @@ public class Evento {
 		public Evento(String eventTitle, LocalDate eventData, int totalPlaces) {
 			this.eventTitle = eventTitle;
 			this.reservedPlaces = 0;
-			this.eventData = eventData;
 			
+			//Controllo che la data non sia già passata
+			if (!eventData.equals(LocalDate.now())) {  													
+				this.eventData = eventData;		
+			} else {
+				System.out.println("La data che hai inserito è gia passata!");
+			}
+			
+			// Controllo che il numero di posti totali sia positivo
+			if(totalPlaces > 0) { 																	
+				this.totalPlaces = totalPlaces;
+			} else {																			
+				System.out.println("Devi inserire un numero di posto valido!"); 	
+			}
 		}
-		
+
 }
