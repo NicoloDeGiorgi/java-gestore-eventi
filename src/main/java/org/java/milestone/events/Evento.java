@@ -1,6 +1,7 @@
 package org.java.milestone.events;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Evento {
 
@@ -77,5 +78,11 @@ public class Evento {
 			}
 		}
 		
+		//Override metodo 
+		@Override
+		public String toString() {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			return eventData.format(formatter) + " - " + eventTitle;
+		}
 		
 }
