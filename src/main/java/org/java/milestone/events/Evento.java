@@ -54,4 +54,28 @@ public class Evento {
 			return reservedPlaces;
 		}
 		
+		// Metodo per la prenotazione
+		public String reservation() {
+			if (LocalDate.now().isAfter(this.eventData)) {
+				return "L'evento è già passato.";
+			} else if (this.reservedPlaces == this.totalPlaces) {
+				return ("Non ci sono posti disponibili.");
+			} else {
+				this.reservedPlaces++;
+				return "Prenotazione effettuata con successo.";
+			}
+		}
+		// Metodo per la disdetta
+		public String cancelReservation() {
+			if (LocalDate.now().isAfter(this.eventData)) {
+				return "L'evento è già passato.";
+			} else if (this.reservedPlaces == 0) {
+				return "Non sono presenti posti prenotati da disdire.";
+			} else {
+				this.reservedPlaces--;
+				return "Prenotazione cancellata con successo.";
+			}
+		}
+		
+		
 }
