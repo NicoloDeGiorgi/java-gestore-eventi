@@ -3,6 +3,7 @@ package org.java.milestone.events;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 public class Evento {
 
 	// variabili d'istanza
@@ -61,28 +62,51 @@ public class Evento {
 				return "L'evento è già passato.";
 			} else if (this.reservedPlaces == this.totalPlaces) {
 				return ("Non ci sono posti disponibili.");
+				return ("Mi dispiace! Non ci sono posti disponibili.");
 			} else {
 				this.reservedPlaces++;
 				return "Prenotazione effettuata con successo.";
+				return "Complimenti! Prenotazione effettuata con successo.";
 			}
 		}
 		// Metodo per la disdetta
 		public String cancelReservation() {
+		public String deleteReservation() {
 			if (LocalDate.now().isAfter(this.eventData)) {
 				return "L'evento è già passato.";
+				return "Mi dispiace! L'evento è già passato.";
 			} else if (this.reservedPlaces == 0) {
 				return "Non sono presenti posti prenotati da disdire.";
+				return "Mi dispiace! Non sono presenti posti prenotati da disdire.";
 			} else {
 				this.reservedPlaces--;
 				return "Prenotazione cancellata con successo.";
+				return "Complimenti! Prenotazione cancellata con successo.";
 			}
 		}
 		
+		// Data formattata
+            protected String getDateTimeFormatter() {
+	        
+	        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	        
+	        String dataFormattata = getEventData().format(formatoData);
+	        
+	        return dataFormattata;
+	    }
 		//Override metodo 
 		@Override
 		public String toString() {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			return eventData.format(formatter) + " - " + eventTitle;
 		}
+		   @Override
+		    public String toString() {
+		        
+		        return "L\'evento " + getEventTitle()
+		        		+ " in data " + getDateTimeFormatter();
+		    }
+
+
 		
 }
