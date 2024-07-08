@@ -23,13 +23,12 @@ public class Main {
 
         Evento event = new Evento(eventTitle, eventDate, totalPlaces);
         
-        // chiedere all’utente se e quante prenotazioni vuole fare e provare ad effettuarle, implementando opportuni controlli
+        // Chiedere all’utente se e quante prenotazioni vuole fare e provare ad effettuarle, implementando opportuni controlli
         System.out.println("Vuoi effettuare una prenotazione? y/n");
         scan.nextLine();
         String answer = scan.nextLine();
         
-        //ciclo while per prenotazione
-        
+        //Ciclo while per prenotazione
         while (answer.equals("y")) {
             try {
                 System.out.println("Quanti posti vuoi prenotare? ");
@@ -42,13 +41,16 @@ public class Main {
             scan.nextLine();
             answer = scan.nextLine();
         }
-
+        
+          //Stampare a video il numero di posti prenotati e quelli disponibili
         System.out.println("Posti prenotati: " + event.getReservedPlaces());
         System.out.println("Posti disponibili: " + (event.getTotalPlaces() - event.getReservedPlaces()));
-
+        
+          //Chiedere all’utente se e quanti posti vuole disdire
         System.out.println("Vuoi disdire delle prenotazioni? y/n");
         String unsay = scan.nextLine();
-
+      
+      //Ciclo while per disdire
         while (unsay.equals("y")) {
             try {
                 System.out.println("Quanti posti vuoi disdire? ");
@@ -61,10 +63,10 @@ public class Main {
             scan.nextLine();
             unsay = scan.nextLine();
         }
-
+        
+      //Stampare a video il numero di posti prenotati e quelli disponibili
         System.out.println("Posti prenotati: " + event.getReservedPlaces());
         System.out.println("Posti disponibili: " + (event.getTotalPlaces() - event.getReservedPlaces()));
-       
         scan.close();
 
 	}
