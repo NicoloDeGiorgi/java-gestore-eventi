@@ -1,7 +1,10 @@
 package org.java.milestone.events;
 
-import java.util.Scanner;
+
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
 	
@@ -24,6 +27,45 @@ public class Main {
         System.out.println("Vuoi effettuare una prenotazione? y/n");
         scan.nextLine();
         String answer = scan.nextLine();
+        
+        //ciclo while per prenotazione
+        
+        while (answer.equals("y")) {
+            try {
+                System.out.println("Quanti posti vuoi prenotare? ");
+                int reservedPlaces = scan.nextInt();
+                event.book (reservedPlaces);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
+            System.out.println("Vuoi effettuare un altra prenotazione? y/n");
+            scan.nextLine();
+            answer = scan.nextLine();
+        }
+
+        System.out.println("Posti prenotati: " + event.getReservedPlaces());
+        System.out.println("Posti disponibili: " + (event.getTotalPlaces() - event.getReservedPlaces()));
+
+        System.out.println("Vuoi disdire delle prenotazioni? y/n");
+        String unsay = scan.nextLine();
+
+        while (unsay.equals("y")) {
+            try {
+                System.out.println("Quanti posti vuoi disdire? ");
+                int numeroDisdette = scan.nextInt();
+                event.cancel(numeroDisdette);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Errore: " + e.getMessage());
+            }
+            System.out.println("Vuoi disdire altre prenotazioni? y/n");
+            scan.nextLine();
+            unsay = scan.nextLine();
+        }
+
+        System.out.println("Posti prenotati: " + event.getReservedPlaces());
+        System.out.println("Posti disponibili: " + (event.getTotalPlaces() - event.getReservedPlaces()));
+       
+        scan.close();
 
 	}
 	

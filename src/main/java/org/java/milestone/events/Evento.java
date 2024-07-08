@@ -21,6 +21,10 @@ public class Evento {
 	        if (eventDate.isBefore(LocalDate.now())) {
 	            throw new IllegalArgumentException("La data non può essere precedente alla data odierna");
 	        }
+	        this.eventTitle = eventTitle;
+	        this.eventDate = eventDate;
+	        this.totalPlaces = totalPlaces;
+	        this.reservedPlaces = 0;
 
 		}	
    // GETTER E SETTER
@@ -35,10 +39,16 @@ public class Evento {
 		public LocalDate getEventData() {
 			return eventDate;
 		}
+		
+	    public void setData(LocalDate newDate) throws IllegalArgumentException {
+	        if (newDate.isBefore(LocalDate.now())) {
+	            throw new IllegalArgumentException("La data non può essere passata");
+	        }
+	        this.eventDate = newDate;
+	    }
 
-		public void setEventData(LocalDate eventData) {
-			this.eventDate = eventData;
-		}
+
+	
          // solo in lettura
 		public int getTotalPlaces() {
 			return totalPlaces;
@@ -49,43 +59,36 @@ public class Evento {
 		}
 		
 		// Metodo per la prenotazione
-		public String reserved() {
-			if (LocalDate.now().isAfter(this.eventDate)) {
-				return "L'evento è già passato.";
-			} else if (this.reservedPlaces == this.totalPlaces) {
-				return ("Mi dispiace! Non ci sono posti disponibili.");
-			} else {
-				this.reservedPlaces++;
-				return ("Complimenti! Prenotazione effettuata con successo.");
-			}
-		}
+		  public void book(int numeroPosti) throws IllegalArgumentException {
+		        if (eventDate.isBefore(LocalDate.now()) || numeroPosti <= 0) {
+		            throw new IllegalArgumentException("Non si può prenotare");
+		        }
+		        int postiDisponibili = totalPlaces - reservedPlaces;
+		        if (numeroPosti > postiDisponibili) {
+		            throw new IllegalArgumentException("Posti esauriti");
+		        }
+		        reservedPlaces += numeroPosti;
+		    }
+		
 		// Metodo per la disdetta
-		public String deleteReservation() {
-			if (LocalDate.now().isAfter(this.eventDate)) {
-				return ("Mi dispiace! L'evento è già passato.");
-			} else if (this.reservedPlaces == 0) {
-				return ("Mi dispiace! Non sono presenti posti prenotati da disdire.");
-			} else {
-				this.reservedPlaces--;
-				return ("Complimenti! Prenotazione cancellata con successo.");
-			}
+		   public void cancel (int numeroPosti) throws IllegalArgumentException {
+		        if (eventDate.isBefore(LocalDate.now()) || numeroPosti <= 0) {
+		            throw new IllegalArgumentException("Non puoi effettuare la disdetta");
+		        }
+		        if ( reservedPlaces == 0) {
+		            throw new IllegalArgumentException("Non ci sono prenotazioni da cancellare");
+		        }
+		        if (numeroPosti >  reservedPlaces) {
+		            throw new IllegalArgumentException("Il numero dei posti da cancellare è > al numero delle prenotazioni");
+		        }
+		        reservedPlaces -= numeroPosti;
 		}
 		
-		// Data formattata
-            protected String getDateTimeFormatter() {
-	        
-	        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	        
-	        String dataFormattata = getEventData().format(formatoData);
-	        
-	        return dataFormattata;
-	    }
+		
 		//Override metodo 
 		   @Override
 		    public String toString() {
-		        
-		        return "L\'evento " + getEventTitle()
-		        		+ " in data " + getDateTimeFormatter();
+		        return eventDate.toString() + " - " + eventTitle;
 		    }
 
 		
