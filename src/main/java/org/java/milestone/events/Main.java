@@ -1,9 +1,6 @@
 package org.java.milestone.events;
 
-
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -63,7 +60,8 @@ public class Main {
             scan.nextLine();
             unsay = scan.nextLine();
         }
-        
+
+     
       //Stampare a video il numero di posti prenotati e quelli disponibili
         System.out.println("Posti prenotati: " + event.getReservedPlaces());
         System.out.println("Posti disponibili: " + (event.getTotalPlaces() - event.getReservedPlaces()));

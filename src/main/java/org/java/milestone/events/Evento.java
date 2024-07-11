@@ -1,8 +1,6 @@
 package org.java.milestone.events;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 
 public class Evento {
 
@@ -13,7 +11,7 @@ public class Evento {
 		private int reservedPlaces;
 		
 	// Costruttore	
-	    public Evento(String eventTitle, LocalDate eventData, int totalPlaces) throws IllegalArgumentException {
+	    public Evento(String eventTitle, LocalDate eventDate, int totalPlaces) throws IllegalArgumentException {
 	        if (totalPlaces <= 0) {
 	            throw new IllegalArgumentException("Il numero dei posti totali deve essere positivo!");
 	        }
@@ -46,9 +44,7 @@ public class Evento {
 	        }
 	        this.eventDate = newDate;
 	    }
-
-
-	
+	    
          // solo in lettura
 		public int getTotalPlaces() {
 			return totalPlaces;
@@ -84,12 +80,12 @@ public class Evento {
 		        reservedPlaces -= numeroPosti;
 		}
 		
+		   
 		
-		//Override metodo 
+		//Override metodo toString()
 		   @Override
 		    public String toString() {
 		        return eventDate.toString() + " - " + eventTitle;
 		    }
-
-		
+	
 }
